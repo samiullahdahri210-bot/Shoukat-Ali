@@ -1,0 +1,1322 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+  <meta name="theme-color" content="#0a0f1a" />
+  <meta name="description" content="Fine Future Public School Shahpur Chakar - Advanced Professional Tool Suite" />
+  <title>Fine Future Public School | Advanced Tool Suite</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet" />
+
+  <style>
+    :root {
+      --bg-primary: #0a0f1a;
+      --bg-secondary: #111827;
+      --bg-card: rgba(255, 255, 255, 0.03);
+      --text-primary: rgba(255, 255, 255, 0.95);
+      --text-secondary: rgba(255, 255, 255, 0.65);
+      --accent: #00d4aa;
+      --accent-glow: rgba(0, 212, 170, 0.4);
+      --accent-secondary: #00b4d8;
+      --danger: #ff4757;
+      --warning: #ffa502;
+      --success: #2ed573;
+      --border: rgba(255, 255, 255, 0.08);
+      --border-hover: rgba(0, 212, 170, 0.3);
+      --radius: 16px;
+      --radius-sm: 10px;
+      --radius-xs: 6px;
+      --shadow-lg: 0 20px 60px rgba(0, 0, 0, 0.5);
+      --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    body {
+      font-family: 'Inter', system-ui, -apple-system, sans-serif;
+      color: var(--text-primary);
+      overflow-x: hidden;
+      line-height: 1.6;
+      font-size: 16px;
+      min-height: 100vh;
+      background: #0a0f1a;
+    }
+
+    a { color: inherit; text-decoration: none; }
+    button, input, select, textarea { font: inherit; border: none; background: none; outline: none; }
+    img, svg { display: block; max-width: 100%; }
+
+    ::-webkit-scrollbar { width: 8px; height: 8px; }
+    ::-webkit-scrollbar-track { background: var(--bg-primary); }
+    ::-webkit-scrollbar-thumb { background: linear-gradient(180deg, var(--accent), var(--accent-secondary)); border-radius: 4px; }
+    ::-webkit-scrollbar-thumb:hover { background: var(--accent); }
+
+    /* 🖼️ BACKGROUND IMAGE */
+    .site-bg {
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      overflow: hidden;
+    }
+
+    .site-bg img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      position: absolute;
+      top: 0;
+      left: 0;
+    }
+
+    .bg-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(10, 15, 26, 0.85) 0%, rgba(10, 15, 26, 0.75) 50%, rgba(10, 15, 26, 0.9) 100%);
+      z-index: 1;
+    }
+
+    /* Container */
+    .container {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 clamp(20px, 4vw, 48px);
+      position: relative;
+      z-index: 10;
+    }
+
+    /* Header */
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(10, 15, 26, 0.9);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .site-nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      min-height: 68px;
+      gap: 20px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-shrink: 0;
+    }
+
+    .brand-logo {
+      width: 44px;
+      height: 44px;
+      border-radius: 12px;
+      background: linear-gradient(135deg, var(--accent), var(--accent-secondary));
+      padding: 2px;
+      box-shadow: 0 8px 24px rgba(0, 212, 170, 0.2);
+      transition: var(--transition);
+    }
+
+    .brand-logo:hover {
+      transform: scale(1.05);
+    }
+
+    .brand-logo__inner {
+      width: 100%;
+      height: 100%;
+      border-radius: 10px;
+      background: rgba(10, 15, 26, 0.9);
+      display: grid;
+      place-items: center;
+      font-weight: 900;
+      color: var(--accent);
+      font-size: 18px;
+    }
+
+    .brand-text {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .brand-title {
+      font-weight: 900;
+      font-size: 14px;
+      letter-spacing: -0.3px;
+      line-height: 1.2;
+    }
+
+    .brand-title__accent {
+      background: linear-gradient(135deg, var(--accent), var(--accent-secondary));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .brand-sub {
+      font-size: 10px;
+      color: var(--text-secondary);
+      font-weight: 600;
+    }
+
+    /* Navigation */
+    .nav-menu {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      list-style: none;
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      padding: 4px;
+      border-radius: 50px;
+    }
+
+    .nav-link {
+      padding: 9px 18px;
+      border-radius: 50px;
+      font-weight: 600;
+      font-size: 12px;
+      color: var(--text-secondary);
+      transition: var(--transition);
+      cursor: pointer;
+      white-space: nowrap;
+    }
+
+    .nav-link:hover {
+      color: var(--text-primary);
+      background: rgba(255, 255, 255, 0.05);
+    }
+
+    .nav-link.active {
+      color: #fff;
+      background: linear-gradient(135deg, var(--accent), var(--accent-secondary));
+      box-shadow: 0 4px 15px rgba(0, 212, 170, 0.3);
+    }
+
+    .ai-nav-btn {
+      background: linear-gradient(135deg, var(--accent), var(--accent-secondary)) !important;
+      color: #fff !important;
+      font-weight: 700 !important;
+    }
+
+    .mobile-toggle {
+      display: none;
+      width: 40px;
+      height: 40px;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      cursor: pointer;
+      place-items: center;
+      color: var(--text-primary);
+    }
+
+    @media (max-width: 768px) {
+      .mobile-toggle { display: grid; }
+      .nav-menu {
+        position: absolute;
+        top: 68px;
+        left: 16px;
+        right: 16px;
+        flex-direction: column;
+        background: rgba(10, 15, 26, 0.98);
+        backdrop-filter: blur(20px);
+        border: 1px solid var(--border);
+        border-radius: var(--radius);
+        padding: 16px;
+        transform: translateY(-10px);
+        opacity: 0;
+        pointer-events: none;
+        transition: var(--transition);
+      }
+      .nav-menu.open {
+        transform: translateY(0);
+        opacity: 1;
+        pointer-events: auto;
+      }
+      .nav-link { width: 100%; padding: 12px 16px; border-radius: var(--radius-sm); }
+    }
+
+    /* Buttons */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 11px 22px;
+      border-radius: var(--radius-sm);
+      font-weight: 600;
+      font-size: 13px;
+      cursor: pointer;
+      transition: var(--transition);
+      border: 1px solid transparent;
+      white-space: nowrap;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--accent), var(--accent-secondary));
+      color: #fff;
+      box-shadow: 0 4px 15px rgba(0, 212, 170, 0.3);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 25px rgba(0, 212, 170, 0.4);
+    }
+
+    .btn-secondary {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--border);
+      color: var(--text-primary);
+    }
+
+    .btn-secondary:hover {
+      border-color: var(--accent);
+      background: rgba(0, 212, 170, 0.1);
+    }
+
+    .btn-sm { padding: 7px 14px; font-size: 11px; border-radius: var(--radius-xs); }
+    .btn-danger { background: rgba(255, 71, 87, 0.1); border: 1px solid rgba(255, 71, 87, 0.3); color: var(--danger); }
+    .btn-danger:hover { background: rgba(255, 71, 87, 0.2); }
+    .btn-success { background: rgba(46, 213, 115, 0.1); border: 1px solid rgba(46, 213, 115, 0.3); color: var(--success); }
+
+    /* Hero */
+    .hero {
+      position: relative;
+      z-index: 10;
+      padding: 80px 0 60px;
+      text-align: center;
+    }
+
+    .hero-content {
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 18px;
+      background: rgba(0, 212, 170, 0.1);
+      border: 1px solid rgba(0, 212, 170, 0.2);
+      border-radius: 50px;
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--accent);
+      margin-bottom: 24px;
+    }
+
+    .hero-title {
+      font-size: clamp(36px, 5vw, 60px);
+      font-weight: 900;
+      line-height: 1.1;
+      letter-spacing: -1.5px;
+      margin-bottom: 16px;
+    }
+
+    .hero-title span {
+      background: linear-gradient(135deg, var(--accent), var(--accent-secondary));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .hero-description {
+      font-size: 18px;
+      color: var(--text-secondary);
+      line-height: 1.7;
+      margin-bottom: 32px;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .section { position: relative; z-index: 10; padding: 60px 0; }
+    .section-header { text-align: center; margin-bottom: 48px; }
+    .section-header h2 { font-size: clamp(28px, 4vw, 42px); font-weight: 900; letter-spacing: -1px; margin-bottom: 12px; }
+    .section-header p { font-size: 16px; color: var(--text-secondary); max-width: 500px; margin: 0 auto; }
+
+    /* Project Grid */
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 20px;
+    }
+
+    .project-card {
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 24px;
+      transition: var(--transition);
+      cursor: pointer;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .project-card:hover {
+      transform: translateY(-4px);
+      border-color: var(--border-hover);
+      box-shadow: 0 12px 40px rgba(0, 0, 0, 0.3);
+    }
+
+    .project-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--accent), var(--accent-secondary), var(--accent));
+      opacity: 0;
+      transition: var(--transition);
+    }
+
+    .project-card:hover::before { opacity: 1; }
+
+    .project-icon {
+      width: 48px;
+      height: 48px;
+      background: linear-gradient(135deg, rgba(0, 212, 170, 0.2), rgba(0, 180, 216, 0.15));
+      border: 1px solid rgba(0, 212, 170, 0.3);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 14px;
+      font-size: 22px;
+    }
+
+    .project-title { font-size: 18px; font-weight: 700; margin-bottom: 6px; }
+    .project-description { font-size: 13px; color: var(--text-secondary); line-height: 1.6; margin-bottom: 16px; }
+    .project-actions { display: flex; gap: 8px; }
+
+    /* Modal System */
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      z-index: 500;
+      background: rgba(0, 0, 0, 0.85);
+      backdrop-filter: blur(8px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      opacity: 0;
+      visibility: hidden;
+      transition: var(--transition);
+    }
+
+    .modal-overlay.active {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .modal-container {
+      background: linear-gradient(135deg, rgba(17, 24, 39, 0.98), rgba(10, 15, 26, 0.98));
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      width: 100%;
+      max-width: 650px;
+      max-height: 85vh;
+      overflow: hidden;
+      box-shadow: var(--shadow-lg);
+      transform: translateY(20px);
+      transition: var(--transition);
+    }
+
+    .modal-overlay.active .modal-container { transform: translateY(0); }
+    .modal-wide { max-width: 950px; }
+
+    .modal-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 18px 22px;
+      border-bottom: 1px solid var(--border);
+      background: rgba(0, 212, 170, 0.03);
+    }
+
+    .modal-title { font-size: 17px; font-weight: 700; }
+    .modal-close {
+      width: 34px; height: 34px;
+      border-radius: 8px;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--border);
+      cursor: pointer;
+      display: grid;
+      place-items: center;
+      color: var(--text-primary);
+      transition: var(--transition);
+    }
+
+    .modal-close:hover { background: rgba(255, 71, 87, 0.1); border-color: var(--danger); }
+    .modal-body { padding: 22px; overflow-y: auto; max-height: calc(85vh - 80px); }
+
+    /* Form Elements */
+    .form-group { margin-bottom: 14px; }
+    .form-label { display: block; font-size: 11px; font-weight: 600; color: var(--text-secondary); margin-bottom: 6px; text-transform: uppercase; letter-spacing: 0.5px; }
+    .form-input {
+      width: 100%;
+      padding: 11px 15px;
+      background: rgba(0, 0, 0, 0.3);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-xs);
+      color: var(--text-primary);
+      font-size: 13px;
+      transition: var(--transition);
+    }
+
+    .form-input:focus {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px rgba(0, 212, 170, 0.1);
+    }
+
+    textarea.form-input {
+      resize: vertical;
+      min-height: 80px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12px;
+      line-height: 1.7;
+    }
+
+    select.form-input {
+      cursor: pointer;
+      appearance: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23ffffff' d='M6 8L1 3h10z'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 12px center;
+      padding-right: 36px;
+    }
+
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    @media (max-width: 480px) { .form-row { grid-template-columns: 1fr; } }
+
+    /* Tabs */
+    .tabs { display: flex; gap: 6px; margin-bottom: 18px; flex-wrap: wrap; }
+    .tab-btn {
+      padding: 9px 18px;
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      color: var(--text-secondary);
+      cursor: pointer;
+      font-size: 12px;
+      font-weight: 600;
+      transition: var(--transition);
+    }
+    .tab-btn.active { background: linear-gradient(135deg, var(--accent), var(--accent-secondary)); color: #fff; border-color: transparent; }
+    .tab-content { display: none; }
+    .tab-content.active { display: block; }
+
+    /* Badge */
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      padding: 4px 10px;
+      border-radius: 50px;
+      font-size: 10px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    .badge-success { background: rgba(46, 213, 115, 0.15); color: var(--success); border: 1px solid rgba(46, 213, 115, 0.3); }
+    .badge-info { background: rgba(0, 180, 216, 0.15); color: var(--accent-secondary); border: 1px solid rgba(0, 180, 216, 0.3); }
+    .badge-warning { background: rgba(255, 165, 2, 0.15); color: var(--warning); border: 1px solid rgba(255, 165, 2, 0.3); }
+    .badge-danger { background: rgba(255, 71, 87, 0.15); color: var(--danger); border: 1px solid rgba(255, 71, 87, 0.3); }
+
+    /* Result Box */
+    .result-box {
+      background: rgba(0, 0, 0, 0.25);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 16px;
+      margin-top: 14px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 13px;
+      white-space: pre-wrap;
+      max-height: 300px;
+      overflow-y: auto;
+    }
+
+    /* Spinner */
+    .spinner {
+      width: 18px; height: 18px;
+      border: 2px solid rgba(255, 255, 255, 0.3);
+      border-top-color: var(--accent);
+      border-radius: 50%;
+      animation: spin 0.8s linear infinite;
+      display: inline-block;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    .footer {
+      position: relative;
+      z-index: 10;
+      border-top: 1px solid var(--border);
+      padding: 24px 0;
+      text-align: center;
+      background: rgba(10, 15, 26, 0.8);
+    }
+
+    .footer-links {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-top: 12px;
+    }
+
+    .footer-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 8px 16px;
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid var(--border);
+      border-radius: 50px;
+      font-size: 12px;
+      font-weight: 600;
+      transition: var(--transition);
+    }
+
+    .footer-link:hover { border-color: var(--accent); background: rgba(0, 212, 170, 0.1); }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+
+    @media (prefers-reduced-motion: reduce) {
+      * { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+    }
+  </style>
+</head>
+<body>
+  <!-- 🖼️ BACKGROUND IMAGE -->
+  <div class="site-bg">
+    <img src="bg.png" alt="School Background" onerror="this.style.display='none'; this.parentElement.style.background='linear-gradient(135deg, #0a0f1a 0%, #1a1a2e 50%, #16213e 100%)';" />
+    <div class="bg-overlay"></div>
+  </div>
+
+  <!-- Header -->
+  <header class="site-header">
+    <nav class="site-nav container">
+      <a class="brand" href="#home">
+        <div class="brand-logo">
+          <div class="brand-logo__inner">FF</div>
+        </div>
+        <div class="brand-text">
+          <span class="brand-title"><span class="brand-title__accent">Fine Future</span> Public School</span>
+          <span class="brand-sub">Shahpur Chakar</span>
+        </div>
+      </a>
+
+      <button class="mobile-toggle" id="mobileToggle">☰</button>
+
+      <ul class="nav-menu" id="navMenu">
+        <li><a class="nav-link active" href="#home">Home</a></li>
+        <li><a class="nav-link" href="#projects">Tools</a></li>
+        <li><button class="nav-link ai-nav-btn" id="aiNavBtn">🤖 AI Helper</button></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <!-- Hero -->
+    <section class="hero" id="home">
+      <div class="container">
+        <div class="hero-content reveal">
+          <div class="hero-badge">⚡ Advanced Professional Tools</div>
+          <h1 class="hero-title">Powerful <span>Tools</span> for Students</h1>
+          <p class="hero-description">
+            Professional-grade utilities with live APIs: QR Generator, AI Chat, OCR Image-to-Text, 
+            Code Playground, Encrypt/Decrypt, API Tester, and 12+ more powerful tools.
+          </p>
+          <div class="hero-actions">
+            <a href="#projects" class="btn btn-primary">Explore Tools</a>
+            <button class="btn btn-secondary" id="heroAiBtn">🤖 Open AI Helper</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Projects -->
+    <section class="section" id="projects">
+      <div class="container">
+        <div class="section-header reveal"><h2>Professional Tool Suite</h2><p>Advanced utilities with real API integrations</p></div>
+        <div class="projects-grid" id="projectsGrid"></div>
+      </div>
+    </section>
+
+    <footer class="footer">
+      <div class="container">
+        <p style="color:var(--text-secondary);font-size:13px;font-weight:600;">© 2026 Fine Future Public School, Shahpur Chakar</p>
+        <div class="footer-links">
+          <a href="mailto:info.ffpschool@gmail.com" class="footer-link">📧 Email</a>
+          <a href="tel:+923023233661" class="footer-link">📞 Call</a>
+          <a href="https://wa.me/923023233661" target="_blank" rel="noopener" class="footer-link">💬 WhatsApp</a>
+        </div>
+      </div>
+    </footer>
+  </main>
+
+  <div id="modalsContainer"></div>
+
+  <script>
+    (function() {
+      'use strict';
+
+      const $ = (s) => document.querySelector(s);
+      const $$ = (s) => document.querySelectorAll(s);
+
+      // ==================== FREE API KEYS ====================
+      const APIS = {
+        qr: 'https://api.qrserver.com/v1/create-qr-code/',
+        ocr: { key: 'K86789558888957', url: 'https://api.ocr.space/parse/image' },
+        dict: 'https://api.dictionaryapi.dev/api/v2/entries/en/',
+        quote: 'https://api.quotable.io/random',
+        joke: 'https://v2.jokeapi.dev/joke/Any?safe-mode',
+        fact: 'https://uselessfacts.jsph.pl/api/v2/facts/random',
+        cat: 'https://api.thecatapi.com/v1/images/search',
+        dog: 'https://dog.ceo/api/breeds/image/random',
+        weather: 'https://wttr.in/?format=%C+%t+%w+%h',
+        ip: 'https://api.ipify.org?format=json',
+        exchange: 'https://open.er-api.com/v6/latest/USD',
+        github: 'https://api.github.com/users/',
+        crypto: 'https://api.coingecko.com/api/v3/simple/price?ids=bitcoin,ethereum&vs_currencies=usd',
+        advice: 'https://api.adviceslip.com/advice'
+      };
+
+      // ==================== PROJECTS (excluding certificate, ai helper modal, calculator, age detector) ====================
+      const PROJECTS = [
+        { id: 'qrcode', icon: '📱', title: 'QR Code Generator', desc: 'Generate scannable QR codes from text/URL with live preview & download.' },
+        { id: 'ocr', icon: '🔍', title: 'OCR Image to Text', desc: 'Extract text from images using AI-powered OCR.space API — supports multiple languages.' },
+        { id: 'codeplay', icon: '💻', title: 'Code Playground', desc: 'Live HTML/CSS/JS editor with sandboxed preview. Write & run code instantly.' },
+        { id: 'encrypt', icon: '🔒', title: 'AES-GCM Encrypt/Decrypt', desc: 'Military-grade encryption using Web Crypto API. Secure your sensitive text.' },
+        { id: 'apitest', icon: '🔌', title: 'API Tester', desc: 'Test REST APIs with GET/POST/PUT/DELETE, custom headers & body.' },
+        { id: 'password', icon: '🔐', title: 'Password Generator', desc: 'Cryptographically secure passwords with entropy analysis & strength meter.' },
+        { id: 'json', icon: '📋', title: 'JSON Formatter', desc: 'Beautify, minify, validate & fix JSON with error detection.' },
+        { id: 'regex', icon: '🔎', title: 'Regex Tester', desc: 'Build & test regular expressions with live matching, groups & replacement.' },
+        { id: 'markdown', icon: '📝', title: 'Markdown Editor', desc: 'Write Markdown with live HTML preview. Full syntax support.' },
+        { id: 'dict', icon: '📖', title: 'Dictionary Lookup', desc: 'Get definitions, synonyms, phonetics & examples using Dictionary API.' },
+        { id: 'random', icon: '🎲', title: 'Random Generator Suite', desc: 'Random numbers, UUID, colors, dice, coin, jokes, quotes, facts & more.' },
+        { id: 'imageconv', icon: '🖼️', title: 'Image Converter', desc: 'Convert images between PNG, JPEG, WebP with quality & resize options.' },
+        { id: 'wordcount', icon: '📊', title: 'Word Counter', desc: 'Live word, char, sentence, paragraph count with reading time.' },
+        { id: 'palette', icon: '🎨', title: 'Color Palette Generator', desc: 'Generate harmonious color schemes with HEX, RGB & copy support.' },
+        { id: 'datatable', icon: '📋', title: 'CSV Data Table', desc: 'Parse CSV to sortable tables with filtering, search & export.' },
+        { id: 'apis', icon: '🌐', title: 'Live API Data', desc: 'Fetch live data: weather, crypto prices, exchange rates, cat/dog images, IP.' },
+        { id: 'planner', icon: '📅', title: 'Study Planner', desc: 'Organize subjects with priority-based scheduling. Auto-saves weekly plan.' },
+        { id: 'notes', icon: '📓', title: 'Notes Organizer', desc: 'Create, search, edit & delete notes. Persisted in browser storage.' }
+      ];
+
+      // ==================== RENDER PROJECT CARDS ====================
+      function renderCards() {
+        const g = $('#projectsGrid');
+        if (!g) return;
+        g.innerHTML = PROJECTS.map((p, i) => `
+          <div class="project-card reveal" onclick="openTool('${p.id}')" style="animation-delay:${i*0.02}s">
+            <div class="project-icon">${p.icon}</div>
+            <h3 class="project-title">${p.title}</h3>
+            <p class="project-description">${p.desc}</p>
+            <div class="project-actions">
+              <button class="btn btn-primary btn-sm" onclick="event.stopPropagation();openTool('${p.id}')">Open Tool</button>
+            </div>
+          </div>
+        `).join('');
+      }
+
+      // ==================== MODAL SYSTEM ====================
+      let activeModal = null;
+
+      window.openTool = function(id) {
+        if (id === 'ai') { window.open('http://xorval.xo.je/', '_blank'); return; }
+        if (activeModal) { document.body.removeChild(activeModal); activeModal = null; }
+
+        const p = PROJECTS.find(x => x.id === id);
+        if (!p) return;
+
+        const m = document.createElement('div');
+        m.className = 'modal-overlay active';
+        m.innerHTML = `
+          <div class="modal-container ${id === 'codeplay' ? 'modal-wide' : ''}">
+            <div class="modal-header"><h3 class="modal-title">${p.icon} ${p.title}</h3><button class="modal-close" onclick="closeTool()">✕</button></div>
+            <div class="modal-body" id="modalBody-${id}"><div style="text-align:center;padding:40px;"><div class="spinner"></div><p style="margin-top:12px;color:var(--text-secondary);">Loading...</p></div></div>
+          </div>`;
+        document.body.appendChild(m);
+        activeModal = m;
+        setTimeout(() => loadTool(id), 80);
+      };
+
+      window.closeTool = function() {
+        if (activeModal) { activeModal.classList.remove('active'); setTimeout(() => { if (activeModal?.parentNode) document.body.removeChild(activeModal); activeModal = null; }, 300); }
+      };
+
+      function loadTool(id) {
+        const b = $(`#modalBody-${id}`);
+        if (!b) return;
+        const renderers = {
+          qrcode: rQR, ocr: rOCR, codeplay: rCode, encrypt: rEncrypt,
+          apitest: rAPI, password: rPass, json: rJSON, regex: rRegex,
+          markdown: rMD, dict: rDict, random: rRandom, imageconv: rImgConv,
+          wordcount: rWC, palette: rPalette, datatable: rTable, apis: rLiveAPIs,
+          planner: rPlanner, notes: rNotes
+        };
+        b.innerHTML = '';
+        if (renderers[id]) renderers[id](b);
+        else b.innerHTML = '<p style="text-align:center;padding:40px;color:var(--text-secondary);">Coming soon.</p>';
+      }
+
+      // ==================== TOOL RENDERERS ====================
+
+      function rQR(b) {
+        b.innerHTML = `
+          <div class="form-group"><label class="form-label">Text or URL</label><input class="form-input" id="qrIn" value="https://finefuture.edu.pk" onkeydown="if(event.key==='Enter')genQR()"></div>
+          <button class="btn btn-primary" onclick="genQR()" style="width:100%;">Generate QR Code</button>
+          <div id="qrOut" style="text-align:center;margin-top:16px;"></div>
+          <button class="btn btn-secondary" id="qrDl" style="width:100%;margin-top:8px;display:none;" onclick="dlQR()">📥 Download PNG</button>`;
+        window.genQR = function() {
+          const t = $('#qrIn').value.trim(); if (!t) return;
+          const u = APIS.qr + '?size=300x300&data=' + encodeURIComponent(t);
+          $('#qrOut').innerHTML = `<img src="${u}" alt="QR" style="background:#fff;padding:12px;border-radius:10px;max-width:100%;" onload="$('#qrDl').show();">`;
+          $('#qrDl').attr('data-u', u);
+        };
+        window.dlQR = function() { const u = $('#qrDl').attr('data-u'); if (u) { const a = document.createElement('a'); a.href = u; a.download = 'qrcode.png'; a.click(); } };
+      }
+
+      function rOCR(b) {
+        b.innerHTML = `
+          <div style="border:2px dashed var(--border);border-radius:12px;padding:32px;text-align:center;cursor:pointer;margin-bottom:14px;" onclick="$('#ocrFile').click()">
+            <span style="font-size:40px;">📷</span><p style="margin-top:8px;font-weight:600;">Click to Upload Image</p><p style="font-size:11px;color:var(--text-secondary);">PNG, JPG, GIF — OCR.space API</p></div>
+          <input type="file" accept="image/*" id="ocrFile" style="display:none;" onchange="doOCR(event)">
+          <div id="ocrStatus"></div>
+          <textarea class="form-input" id="ocrOut" readonly style="margin-top:12px;min-height:120px;background:rgba(0,0,0,0.3);" placeholder="Extracted text will appear here..."></textarea>
+          <button class="btn btn-secondary" onclick="copyOCR()" style="margin-top:8px;width:100%;">📋 Copy Text</button>`;
+        window.doOCR = async function(e) {
+          const f = e.target.files[0]; if (!f) return;
+          $('#ocrStatus').innerHTML = '<div style="text-align:center;padding:12px;"><span class="spinner"></span> Processing with OCR.space API...</div>';
+          const fd = new FormData(); fd.append('file', f); fd.append('apikey', APIS.ocr.key); fd.append('language', 'eng'); fd.append('isTable', 'true'); fd.append('OCREngine', '2');
+          try {
+            const r = await fetch(APIS.ocr.url, { method: 'POST', body: fd });
+            const d = await r.json();
+            if (d.ParsedResults?.length) {
+              const txt = d.ParsedResults[0].ParsedText;
+              $('#ocrOut').value = txt;
+              $('#ocrStatus').innerHTML = `<span class="badge badge-success">✓ Text extracted (${txt.length} chars)</span>`;
+            } else { $('#ocrStatus').innerHTML = '<span class="badge badge-danger">No text found. Try a clearer image.</span>'; }
+          } catch(e) { $('#ocrStatus').innerHTML = `<span class="badge badge-danger">Error: ${e.message}</span>`; }
+        };
+        window.copyOCR = function() { $('#ocrOut').select(); document.execCommand('copy'); };
+      }
+
+      function rCode(b) {
+        b.innerHTML = `
+          <div class="tabs"><button class="tab-btn active" onclick="ct('html')">HTML</button><button class="tab-btn" onclick="ct('css')">CSS</button><button class="tab-btn" onclick="ct('js')">JS</button></div>
+          <div id="cHtml"><textarea class="form-input" id="htmlC" style="min-height:100px;font-family:'JetBrains Mono',monospace;">&lt;h1&gt;Hello!&lt;/h1&gt;&lt;p&gt;Edit me&lt;/p&gt;</textarea></div>
+          <div id="cCss" style="display:none;"><textarea class="form-input" id="cssC" style="min-height:100px;font-family:'JetBrains Mono',monospace;">body{font-family:Arial;padding:20px;background:#1a1a2e;color:#fff}h1{color:#00d4aa}</textarea></div>
+          <div id="cJs" style="display:none;"><textarea class="form-input" id="jsC" style="min-height:100px;font-family:'JetBrains Mono',monospace;">console.log('Running...');</textarea></div>
+          <div style="display:flex;gap:8px;margin-top:10px;"><button class="btn btn-primary" onclick="runC()">▶ Run</button><button class="btn btn-secondary" onclick="clearC()">Clear</button></div>
+          <iframe id="cFrame" style="width:100%;height:250px;border:1px solid var(--border);border-radius:8px;margin-top:10px;background:#fff;"></iframe>`;
+        window.ct = function(t) { ['html','css','js'].forEach(x => $(`#c${x.charAt(0).toUpperCase()+x.slice(1)}`).style.display = x===t?'block':'none'); };
+        window.runC = function() { $('#cFrame').srcdoc = `<!DOCTYPE html><html><head><style>${$('#cssC').value}</style></head><body>${$('#htmlC').value}<script>${$('#jsC').value}<\/script></body></html>`; };
+        window.clearC = function() { $('#htmlC').value='';$('#cssC').value='';$('#jsC').value='';$('#cFrame').srcdoc=''; };
+      }
+
+      function rEncrypt(b) {
+        b.innerHTML = `
+          <div class="form-group"><label class="form-label">Passphrase</label><input class="form-input" id="ePass" type="password" placeholder="Enter encryption key"></div>
+          <div class="form-group"><label class="form-label">Text</label><textarea class="form-input" id="eText" style="min-height:80px;"></textarea></div>
+          <div style="display:flex;gap:8px;"><button class="btn btn-primary" onclick="enc()">🔒 Encrypt</button><button class="btn btn-secondary" onclick="dec()">🔓 Decrypt</button><button class="btn btn-secondary" onclick="copyE()">Copy</button></div>
+          <textarea class="form-input" id="eOut" readonly style="margin-top:10px;min-height:80px;background:rgba(0,0,0,0.3);"></textarea>`;
+        async function dk(pw, salt) {
+          const km = await crypto.subtle.importKey('raw', new TextEncoder().encode(pw), 'PBKDF2', false, ['deriveKey']);
+          return crypto.subtle.deriveKey({ name: 'PBKDF2', salt, iterations: 120000, hash: 'SHA-256' }, km, { name: 'AES-GCM', length: 256 }, false, ['encrypt', 'decrypt']);
+        }
+        window.enc = async function() {
+          const pw = $('#ePass').value, t = $('#eText').value; if (!pw || !t) return;
+          const salt = crypto.getRandomValues(new Uint8Array(16)), iv = crypto.getRandomValues(new Uint8Array(12));
+          const key = await dk(pw, salt);
+          const ct = await crypto.subtle.encrypt({ name: 'AES-GCM', iv }, key, new TextEncoder().encode(t));
+          const c = new Uint8Array(48 + ct.byteLength); c.set(salt, 0); c.set(iv, 16); c.set(new Uint8Array(ct), 28);
+          $('#eOut').value = btoa(String.fromCharCode(...c));
+        };
+        window.dec = async function() {
+          const pw = $('#ePass').value, t = $('#eText').value; if (!pw || !t) return;
+          try {
+            const d = Uint8Array.from(atob(t), c => c.charCodeAt(0));
+            const salt = d.slice(0, 16), iv = d.slice(16, 28), ct = d.slice(28);
+            const key = await dk(pw, salt);
+            const pt = await crypto.subtle.decrypt({ name: 'AES-GCM', iv }, key, ct);
+            $('#eOut').value = new TextDecoder().decode(pt);
+          } catch(e) { $('#eOut').value = '❌ Decryption failed. Check passphrase.'; }
+        };
+        window.copyE = function() { $('#eOut').select(); document.execCommand('copy'); };
+      }
+
+      function rAPI(b) {
+        b.innerHTML = `
+          <div style="display:flex;gap:6px;margin-bottom:10px;"><select class="form-input" id="aMethod" style="width:90px;"><option>GET</option><option>POST</option><option>PUT</option><option>DELETE</option></select><input class="form-input" id="aUrl" value="https://api.quotable.io/random" style="flex:1;"><button class="btn btn-primary" onclick="sendA()">Send</button></div>
+          <textarea class="form-input" id="aBody" style="min-height:60px;" placeholder="Request body (JSON)"></textarea>
+          <div id="aStatus" style="margin-top:8px;"></div>
+          <textarea class="form-input" id="aOut" readonly style="margin-top:8px;min-height:180px;background:rgba(0,0,0,0.3);font-family:'JetBrains Mono',monospace;font-size:11px;"></textarea>`;
+        window.sendA = async function() {
+          const url = $('#aUrl').value.trim(); if (!url) return;
+          const method = $('#aMethod').value, body = $('#aBody').value;
+          const opts = { method, headers: { 'Content-Type': 'application/json' } };
+          if (['POST', 'PUT', 'PATCH'].includes(method) && body.trim()) opts.body = body;
+          $('#aStatus').innerHTML = '<span class="spinner"></span> Sending...';
+          try {
+            const st = performance.now();
+            const r = await fetch(url, opts);
+            const txt = await r.text();
+            const dur = Math.round(performance.now() - st);
+            $('#aStatus').innerHTML = `<span class="badge ${r.ok ? 'badge-success' : 'badge-danger'}">${r.status}</span> <span class="badge badge-info">${dur}ms</span> <span class="badge badge-info">${(txt.length/1024).toFixed(1)}KB</span>`;
+            try { $('#aOut').value = JSON.stringify(JSON.parse(txt), null, 2); } catch { $('#aOut').value = txt; }
+          } catch(e) { $('#aStatus').innerHTML = `<span class="badge badge-danger">${e.message}</span>`; }
+        };
+      }
+
+      function rPass(b) {
+        b.innerHTML = `
+          <div class="form-group"><label class="form-label">Length: <strong id="pLen">20</strong></label><input type="range" min="8" max="64" value="20" class="form-input" id="pRange" oninput="$('#pLen').textContent=this.value;gP()"></div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-bottom:12px;">
+            <label style="display:flex;align-items:center;gap:6px;padding:8px;background:rgba(255,255,255,0.03);border-radius:6px;cursor:pointer;font-size:12px;"><input type="checkbox" id="pUp" checked onchange="gP()"> Uppercase</label>
+            <label style="display:flex;align-items:center;gap:6px;padding:8px;background:rgba(255,255,255,0.03);border-radius:6px;cursor:pointer;font-size:12px;"><input type="checkbox" id="pLo" checked onchange="gP()"> Lowercase</label>
+            <label style="display:flex;align-items:center;gap:6px;padding:8px;background:rgba(255,255,255,0.03);border-radius:6px;cursor:pointer;font-size:12px;"><input type="checkbox" id="pNum" checked onchange="gP()"> Numbers</label>
+            <label style="display:flex;align-items:center;gap:6px;padding:8px;background:rgba(255,255,255,0.03);border-radius:6px;cursor:pointer;font-size:12px;"><input type="checkbox" id="pSym" checked onchange="gP()"> Symbols</label>
+          </div>
+          <input class="form-input" id="pOut" readonly style="text-align:center;font-family:'JetBrains Mono',monospace;font-size:15px;letter-spacing:1px;">
+          <div style="display:flex;gap:6px;margin-top:8px;"><button class="btn btn-primary" onclick="gP()" style="flex:1;">Generate</button><button class="btn btn-secondary" onclick="copyP()">📋 Copy</button></div>
+          <div id="pStr" style="text-align:center;margin-top:8px;font-weight:600;"></div>`;
+        window.gP = function() {
+          const l = +$('#pRange').value; let s = '';
+          if ($('#pUp').checked) s += 'ABCDEFGHJKLMNPQRSTUVWXYZ';
+          if ($('#pLo').checked) s += 'abcdefghijkmnopqrstuvwxyz';
+          if ($('#pNum').checked) s += '23456789';
+          if ($('#pSym').checked) s += '!@#$%^&*()_+-=[]{}|;:,.<>?';
+          if (!s) { $('#pOut').value = 'Select options'; return; }
+          const a = new Uint32Array(l); crypto.getRandomValues(a);
+          let pw = ''; for (let i = 0; i < l; i++) pw += s[a[i] % s.length];
+          $('#pOut').value = pw;
+          const bits = Math.log2(s.length) * l;
+          let score = 0; if (l >= 14) score++; if (l >= 20) score++; if (/[A-Z]/.test(pw)) score++; if (/[0-9]/.test(pw)) score++; if (/[^A-Za-z0-9]/.test(pw)) score++;
+          const labels = ['Weak', 'Fair', 'Good', 'Strong', 'Very Strong', 'Excellent'];
+          const colors = ['var(--danger)', 'var(--warning)', 'var(--warning)', 'var(--success)', '#00d4aa', '#00d4aa'];
+          $('#pStr').innerHTML = `<span style="color:${colors[score]}">${labels[Math.min(score, 5)]}</span> · ${bits.toFixed(0)} bits entropy`;
+        };
+        window.copyP = function() { $('#pOut').select(); document.execCommand('copy'); };
+        gP();
+      }
+
+      function rJSON(b) {
+        b.innerHTML = `
+          <textarea class="form-input" id="jIn" placeholder='{"key":"value"}' style="min-height:80px;"></textarea>
+          <div style="display:flex;gap:6px;margin-top:8px;"><button class="btn btn-primary" onclick="jAct('b')">Beautify</button><button class="btn btn-secondary" onclick="jAct('m')">Minify</button><button class="btn btn-secondary" onclick="jAct('v')">Validate</button><button class="btn btn-secondary" onclick="jAct('f')">Auto-Fix</button><button class="btn btn-secondary" onclick="copyJ()">Copy</button></div>
+          <div id="jStat" style="margin-top:6px;"></div>
+          <textarea class="form-input" id="jOut" readonly style="margin-top:6px;min-height:100px;background:rgba(0,0,0,0.3);"></textarea>`;
+        window.jAct = function(m) {
+          const inp = $('#jIn').value;
+          try {
+            let p = JSON.parse(inp);
+            if (m === 'f') {
+              let fixed = inp.replace(/'/g, '"').replace(/(\w+):/g, '"$1":').replace(/,\s*}/g, '}').replace(/,\s*]/g, ']');
+              p = JSON.parse(fixed);
+              $('#jStat').innerHTML = '<span class="badge badge-success">✓ Auto-fixed & Valid</span>';
+            }
+            $('#jOut').value = m === 'b' ? JSON.stringify(p, null, 2) : m === 'm' ? JSON.stringify(p) : 'Valid JSON ✓';
+            if (m === 'v') $('#jStat').innerHTML = '<span class="badge badge-success">✓ Valid JSON</span>';
+          } catch(e) {
+            $('#jStat').innerHTML = `<span class="badge badge-danger">${e.message}</span>`;
+            if (m !== 'v') $('#jOut').value = '';
+          }
+        };
+        window.copyJ = function() { $('#jOut').select(); document.execCommand('copy'); };
+      }
+
+      function rRegex(b) {
+        b.innerHTML = `
+          <div class="form-row"><div class="form-group"><label class="form-label">Pattern</label><input class="form-input" id="rxP" placeholder="\\d+" oninput="rx()"></div><div class="form-group"><label class="form-label">Flags</label><input class="form-input" id="rxF" value="gi" oninput="rx()"></div></div>
+          <div class="form-group"><label class="form-label">Test String</label><textarea class="form-input" id="rxS" oninput="rx()" style="min-height:70px;"></textarea></div>
+          <div class="form-group"><label class="form-label">Replace With</label><input class="form-input" id="rxR" oninput="rx()"></div>
+          <div id="rxStat" style="margin-top:6px;"></div>
+          <div class="result-box" id="rxOut"></div>`;
+        window.rx = function() {
+          const p = $('#rxP').value, f = $('#rxF').value, s = $('#rxS').value, r = $('#rxR').value;
+          if (!p) { $('#rxStat').innerHTML = ''; $('#rxOut').textContent = ''; return; }
+          try {
+            const re = new RegExp(p, f);
+            const matches = [...s.matchAll(re)];
+            let out = matches.map((m, i) => `${i + 1}: "${m[0]}" at index ${m.index}` + (m.groups ? ` | Groups: ${JSON.stringify(m.groups)}` : '')).join('\n');
+            if (r) {
+              try { out += '\n\n--- Replace Result ---\n' + s.replace(re, r); } catch {}
+            }
+            $('#rxStat').innerHTML = `<span class="badge badge-success">${matches.length} match(es)</span>`;
+            $('#rxOut').textContent = out || 'No matches found.';
+          } catch(e) { $('#rxStat').innerHTML = `<span class="badge badge-danger">${e.message}</span>`; }
+        };
+      }
+
+      function rMD(b) {
+        b.innerHTML = `
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">
+            <textarea class="form-input" id="mdIn" style="min-height:350px;" oninput="mdUp()"># Heading
+## Subheading
+**Bold** *italic* \`code\`
+- List item
+> Quote
+[Link](https://example.com)</textarea>
+            <div id="mdOut" style="background:rgba(0,0,0,0.2);border-radius:8px;padding:14px;overflow-y:auto;min-height:350px;font-size:13px;line-height:1.7;"></div>
+          </div>`;
+        window.mdUp = function() {
+          let t = $('#mdIn').value;
+          t = t.replace(/```([\s\S]*?)```/g, '<pre style="background:rgba(0,0,0,0.3);padding:10px;border-radius:6px;"><code>$1</code></pre>');
+          t = t.replace(/`([^`]+)`/g, '<code style="background:rgba(0,212,170,0.1);padding:1px 5px;border-radius:3px;color:#00d4aa;">$1</code>');
+          t = t.replace(/^### (.+)$/gm, '<h3>$1</h3>').replace(/^## (.+)$/gm, '<h2>$1</h2>').replace(/^# (.+)$/gm, '<h1>$1</h1>');
+          t = t.replace(/^\s*[-*] (.+)$/gm, '<li>$1</li>').replace(/(<li>.*<\/li>)/s, '<ul>$1</ul>');
+          t = t.replace(/^\> (.+)$/gm, '<blockquote style="border-left:3px solid #00d4aa;padding-left:10px;color:var(--text-secondary);margin:8px 0;">$1</blockquote>');
+          t = t.replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>').replace(/\*(.+?)\*/g, '<em>$1</em>');
+          t = t.replace(/!\[([^\]]*)\]\(([^)]+)\)/g, '<img alt="$1" src="$2" style="max-width:100%;border-radius:6px;">');
+          t = t.replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" target="_blank" style="color:#00d4aa;">$1</a>');
+          $('#mdOut').innerHTML = '<div>' + t.replace(/\n\n/g, '</div><div style="margin:8px 0;">') + '</div>';
+        };
+        mdUp();
+      }
+
+      function rDict(b) {
+        b.innerHTML = `
+          <div style="display:flex;gap:8px;margin-bottom:12px;"><input class="form-input" id="dw" placeholder="Enter word..." style="flex:1;" onkeydown="if(event.key==='Enter')lookupD()"><button class="btn btn-primary" onclick="lookupD()">🔍 Lookup</button></div>
+          <div id="dOut" style="min-height:200px;">
+            <p style="text-align:center;color:var(--text-secondary);">Try: "education", "technology", "brilliant"</p>
+          </div>`;
+        window.lookupD = async function() {
+          const w = $('#dw').value.trim(); if (!w) return;
+          $('#dOut').innerHTML = '<div style="text-align:center;padding:20px;"><span class="spinner"></span> Searching...</div>';
+          try {
+            const r = await fetch(APIS.dict + w);
+            if (!r.ok) { $('#dOut').innerHTML = `<p style="text-align:center;color:var(--danger);">❌ Word "${w}" not found.</p>`; return; }
+            const d = await r.json();
+            const entry = d[0];
+            let html = `<h3 style="color:#00d4aa;font-size:20px;margin-bottom:4px;">📖 ${entry.word}</h3>`;
+            if (entry.phonetics?.[0]?.text) html += `<p style="color:var(--text-secondary);margin-bottom:8px;">🔊 ${entry.phonetics[0].text}</p>`;
+            entry.meanings.forEach(m => {
+              html += `<div style="margin:12px 0;padding:10px;background:rgba(0,0,0,0.2);border-radius:8px;"><strong style="color:#00b4d8;">${m.partOfSpeech}</strong><ul style="margin:8px 0 0 18px;">`;
+              m.definitions.slice(0, 3).forEach(def => {
+                html += `<li style="margin:6px 0;">${def.definition}`;
+                if (def.example) html += `<br><span style="color:var(--text-secondary);font-style:italic;">"${def.example}"</span>`;
+                if (def.synonyms?.length) html += `<br><span style="color:#2ed573;font-size:11px;">Synonyms: ${def.synonyms.slice(0, 5).join(', ')}</span>`;
+                html += '</li>';
+              });
+              html += '</ul></div>';
+            });
+            $('#dOut').innerHTML = html;
+          } catch(e) { $('#dOut').innerHTML = `<p style="text-align:center;color:var(--danger);">Error: ${e.message}</p>`; }
+        };
+      }
+
+      function rRandom(b) {
+        b.innerHTML = `
+          <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin-bottom:14px;">
+            <button class="btn btn-secondary btn-sm" onclick="rGen('num')">🔢 1-100</button>
+            <button class="btn btn-secondary btn-sm" onclick="rGen('dice')">🎲 Dice</button>
+            <button class="btn btn-secondary btn-sm" onclick="rGen('coin')">🪙 Coin</button>
+            <button class="btn btn-secondary btn-sm" onclick="rGen('uuid')">🆔 UUID</button>
+            <button class="btn btn-secondary btn-sm" onclick="rGen('color')">🎨 Color</button>
+            <button class="btn btn-secondary btn-sm" onclick="rGen('joke')">😂 Joke</button>
+            <button class="btn btn-secondary btn-sm" onclick="rGen('quote')">💬 Quote</button>
+            <button class="btn btn-secondary btn-sm" onclick="rGen('fact')">📚 Fact</button>
+            <button class="btn btn-secondary btn-sm" onclick="rGen('advice')">💡 Advice</button>
+            <button class="btn btn-secondary btn-sm" onclick="rGen('cat')">🐱 Cat</button>
+            <button class="btn btn-secondary btn-sm" onclick="rGen('dog')">🐶 Dog</button>
+            <button class="btn btn-secondary btn-sm" onclick="rGen('btc')">💰 BTC</button>
+          </div>
+          <textarea class="form-input" id="shfL" placeholder="Items to shuffle (one per line)..." style="min-height:60px;"></textarea>
+          <button class="btn btn-primary" onclick="shf()" style="width:100%;margin-top:6px;">🔀 Shuffle List</button>
+          <div id="rOut" class="result-box" style="text-align:center;font-size:14px;min-height:60px;"></div>`;
+        window.rGen = async function(t) {
+          let r;
+          switch(t) {
+            case 'num': r = Math.floor(Math.random() * 100) + 1; break;
+            case 'dice': r = '🎲 ' + (Math.floor(Math.random() * 6) + 1); break;
+            case 'coin': r = Math.random() < 0.5 ? '🪙 Heads' : '🪙 Tails'; break;
+            case 'uuid': r = crypto.randomUUID ? crypto.randomUUID() : 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, c => { const r = Math.random() * 16 | 0; return (c === 'x' ? r : r & 0x3 | 0x8).toString(16); }); break;
+            case 'color': r = '#' + Math.floor(Math.random() * 16777215).toString(16).padStart(6, '0'); break;
+            case 'joke':
+              try { const j = await (await fetch(APIS.joke)).json(); r = j.type === 'twopart' ? `${j.setup}\n\n${j.delivery}` : j.joke; } catch { r = 'Why did the student eat his homework? Because the teacher said it was a piece of cake!'; }
+              break;
+            case 'quote':
+              try { const q = await (await fetch(APIS.quote)).json(); r = `"${q.content}"\n— ${q.author}`; } catch { r = '"The only way to do great work is to love what you do."\n— Steve Jobs'; }
+              break;
+            case 'fact':
+              try { const f = await (await fetch(APIS.fact)).json(); r = f.text; } catch { r = 'A day on Venus is longer than a year on Venus.'; }
+              break;
+            case 'advice':
+              try { const a = await (await fetch(APIS.advice)).json(); r = a.slip.advice; } catch { r = 'Always keep learning new things!'; }
+              break;
+            case 'cat':
+              try { const c = await (await fetch(APIS.cat)).json(); $('#rOut').innerHTML = `<img src="${c[0].url}" style="max-width:100%;max-height:300px;border-radius:10px;">`; return; } catch { r = '🐱 Meow! (API unavailable)'; }
+              break;
+            case 'dog':
+              try { const d = await (await fetch(APIS.dog)).json(); $('#rOut').innerHTML = `<img src="${d.message}" style="max-width:100%;max-height:300px;border-radius:10px;">`; return; } catch { r = '🐶 Woof! (API unavailable)'; }
+              break;
+            case 'btc':
+              try { const b = await (await fetch(APIS.crypto)).json(); r = `₿ Bitcoin: $${b.bitcoin.usd}\nΞ Ethereum: $${b.ethereum.usd}`; } catch { r = 'Crypto data unavailable.'; }
+              break;
+          }
+          $('#rOut').innerHTML = typeof r === 'object' ? r : `<p style="font-size:15px;">${r}</p>`;
+        };
+        window.shf = function() {
+          const items = $('#shfL').value.split('\n').filter(Boolean);
+          for (let i = items.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [items[i], items[j]] = [items[j], items[i]]; }
+          $('#rOut').innerHTML = items.length ? items.map((x, i) => `${i + 1}. ${x}`).join('\n') : '<p style="color:var(--text-secondary);">Add items to shuffle.</p>';
+        };
+      }
+
+      function rImgConv(b) {
+        b.innerHTML = `
+          <input type="file" accept="image/*" class="form-input" id="iFile" onchange="prevI()" style="margin-bottom:10px;">
+          <div class="form-row">
+            <div class="form-group"><label class="form-label">Format</label><select class="form-input" id="iFmt"><option value="image/png">PNG</option><option value="image/jpeg">JPEG</option><option value="image/webp">WebP</option></select></div>
+            <div class="form-group"><label class="form-label">Quality</label><input class="form-input" id="iQ" type="number" value="0.9" min="0.1" max="1" step="0.05"></div>
+          </div>
+          <div class="form-row">
+            <div class="form-group"><label class="form-label">Width (px)</label><input class="form-input" id="iW" type="number"></div>
+            <div class="form-group"><label class="form-label">Height (px)</label><input class="form-input" id="iH" type="number"></div>
+          </div>
+          <button class="btn btn-primary" onclick="convI()" style="width:100%;">Convert & Download</button>
+          <img id="iPrev" style="max-width:100%;margin-top:10px;border-radius:8px;display:none;">
+          <canvas id="iCanvas" style="display:none;"></canvas>`;
+        window.prevI = function() {
+          const f = $('#iFile').files[0]; if (!f) return;
+          const reader = new FileReader();
+          reader.onload = function() { const img = $('#iPrev'); img.src = reader.result; img.style.display = 'block'; img.onload = function() { $('#iW').value = img.naturalWidth; $('#iH').value = img.naturalHeight; }; };
+          reader.readAsDataURL(f);
+        };
+        window.convI = function() {
+          const img = $('#iPrev'); if (!img.src) { alert('Select an image.'); return; }
+          const c = $('#iCanvas');
+          const w = parseInt($('#iW').value) || img.naturalWidth;
+          const h = parseInt($('#iH').value) || img.naturalHeight;
+          c.width = w; c.height = h;
+          c.getContext('2d').drawImage(img, 0, 0, w, h);
+          const url = c.toDataURL($('#iFmt').value, parseFloat($('#iQ').value));
+          const a = document.createElement('a'); a.href = url; a.download = 'converted.' + $('#iFmt').value.split('/')[1]; a.click();
+        };
+      }
+
+      function rWC(b) {
+        b.innerHTML = `
+          <textarea class="form-input" id="wcIn" placeholder="Type or paste text..." style="min-height:150px;" oninput="wc()"></textarea>
+          <div style="display:grid;grid-template-columns:repeat(5,1fr);gap:8px;margin-top:12px;">
+            <div style="background:rgba(0,0,0,0.2);padding:12px;border-radius:8px;text-align:center;"><div style="font-size:22px;font-weight:900;color:#00d4aa;" id="wcW">0</div><div style="font-size:10px;">Words</div></div>
+            <div style="background:rgba(0,0,0,0.2);padding:12px;border-radius:8px;text-align:center;"><div style="font-size:22px;font-weight:900;color:#00d4aa;" id="wcC">0</div><div style="font-size:10px;">Chars</div></div>
+            <div style="background:rgba(0,0,0,0.2);padding:12px;border-radius:8px;text-align:center;"><div style="font-size:22px;font-weight:900;color:#00d4aa;" id="wcS">0</div><div style="font-size:10px;">Sentences</div></div>
+            <div style="background:rgba(0,0,0,0.2);padding:12px;border-radius:8px;text-align:center;"><div style="font-size:22px;font-weight:900;color:#00d4aa;" id="wcP">0</div><div style="font-size:10px;">Paras</div></div>
+            <div style="background:rgba(0,0,0,0.2);padding:12px;border-radius:8px;text-align:center;"><div style="font-size:22px;font-weight:900;color:#00d4aa;" id="wcR">0m</div><div style="font-size:10px;">Read</div></div>
+          </div>`;
+        window.wc = function() {
+          const t = $('#wcIn').value;
+          const w = (t.match(/\S+/g) || []).length;
+          const c = t.length;
+          const s = (t.match(/[^.!?]+[.!?]+/g) || []).length || (t.trim() ? 1 : 0);
+          const p = (t.match(/\n\n/g) || []).length + 1;
+          const r = Math.ceil(w / 200);
+          $('#wcW').textContent = w;
+          $('#wcC').textContent = c;
+          $('#wcS').textContent = s;
+          $('#wcP').textContent = t.trim() ? p : 0;
+          $('#wcR').textContent = r + 'm';
+        };
+      }
+
+      function rPalette(b) {
+        b.innerHTML = `
+          <div class="form-row">
+            <div class="form-group"><label class="form-label">Base Color</label><input class="form-input" id="paB" type="color" value="#00d4aa"></div>
+            <div class="form-group"><label class="form-label">Scheme</label><select class="form-input" id="paS"><option value="ana">Analogous</option><option value="comp">Complementary</option><option value="tri">Triadic</option><option value="mono">Monochromatic</option></select></div>
+          </div>
+          <button class="btn btn-primary" onclick="genPal()" style="width:100%;">Generate Palette</button>
+          <div id="paOut" style="display:grid;grid-template-columns:repeat(5,1fr);gap:6px;margin-top:12px;"></div>`;
+        window.genPal = function() {
+          const hex = $('#paB').value, scheme = $('#paS').value;
+          const r = parseInt(hex.slice(1, 3), 16), g = parseInt(hex.slice(3, 5), 16), b = parseInt(hex.slice(5, 7), 16);
+          let cols = [hex];
+          if (scheme === 'ana') for (let i = 1; i < 5; i++) cols.push(`#${Math.min(255, r + i * 20).toString(16).padStart(2, '0')}${Math.min(255, g + i * 15).toString(16).padStart(2, '0')}${Math.max(0, b - i * 10).toString(16).padStart(2, '0')}`);
+          else if (scheme === 'comp') { cols.push(`#${(255 - r).toString(16).padStart(2, '0')}${(255 - g).toString(16).padStart(2, '0')}${(255 - b).toString(16).padStart(2, '0')}`); cols.push(`#${Math.min(255, r + 40).toString(16).padStart(2, '0')}${Math.min(255, g + 40).toString(16).padStart(2, '0')}${Math.min(255, b + 40).toString(16).padStart(2, '0')}`); }
+          else if (scheme === 'tri') { cols.push(`#${g.toString(16).padStart(2, '0')}${b.toString(16).padStart(2, '0')}${r.toString(16).padStart(2, '0')}`); cols.push(`#${b.toString(16).padStart(2, '0')}${r.toString(16).padStart(2, '0')}${g.toString(16).padStart(2, '0')}`); }
+          else for (let i = 1; i < 5; i++) { const f = 0.7 + i * 0.15; cols.push(`#${Math.min(255, Math.round(r * f)).toString(16).padStart(2, '0')}${Math.min(255, Math.round(g * f)).toString(16).padStart(2, '0')}${Math.min(255, Math.round(b * f)).toString(16).padStart(2, '0')}`); }
+          $('#paOut').innerHTML = cols.slice(0, 5).map(c => {
+            const rgb = `${parseInt(c.slice(1, 3), 16)}, ${parseInt(c.slice(3, 5), 16)}, ${parseInt(c.slice(5, 7), 16)}`;
+            return `<div style="background:${c};height:90px;border-radius:8px;cursor:pointer;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;padding:8px;font-size:10px;font-weight:700;color:#fff;text-shadow:0 1px 2px rgba(0,0,0,0.6);" onclick="navigator.clipboard.writeText('${c}')" title="Click to copy">${c}<br><span style="font-size:9px;">rgb(${rgb})</span></div>`;
+          }).join('');
+        };
+        genPal();
+      }
+
+      function rTable(b) {
+        b.innerHTML = `
+          <textarea class="form-input" id="csvIn" placeholder="Name,Age,City&#10;Ali,18,Karachi&#10;Sara,17,Lahore" style="min-height:70px;"></textarea>
+          <div style="display:flex;gap:6px;margin-top:8px;"><button class="btn btn-primary" onclick="buildT()">Build Table</button><input class="form-input" id="tFilt" placeholder="Filter..." oninput="buildT()" style="flex:1;"><button class="btn btn-secondary btn-sm" onclick="expCSV()">📥 Export</button></div>
+          <div id="tOut" style="margin-top:10px;overflow-x:auto;font-size:11px;"></div>`;
+        let tData = null;
+        window.buildT = function() {
+          tData = $('#csvIn').value.trim().split('\n').map(r => r.split(','));
+          if (!tData.length) { $('#tOut').innerHTML = ''; return; }
+          const f = $('#tFilt').value.toLowerCase();
+          const rows = f ? [tData[0], ...tData.slice(1).filter(r => r.some(c => c.toLowerCase().includes(f)))] : tData;
+          $('#tOut').innerHTML = `<table style="width:100%;border-collapse:collapse;"><thead><tr>${rows[0].map(h => `<th style="background:rgba(0,212,170,0.1);padding:8px;border:1px solid var(--border);cursor:pointer;">${h}</th>`).join('')}</tr></thead><tbody>${rows.slice(1).map(r => `<tr>${r.map(c => `<td style="padding:6px;border:1px solid var(--border);">${c || ''}</td>`).join('')}</tr>`).join('')}</tbody></table>`;
+        };
+        window.expCSV = function() {
+          if (!tData) return;
+          const csv = tData.map(r => r.join(',')).join('\n');
+          const a = document.createElement('a'); a.href = 'data:text/csv;charset=utf-8,' + encodeURIComponent(csv); a.download = 'data.csv'; a.click();
+        };
+      }
+
+      function rLiveAPIs(b) {
+        b.innerHTML = `
+          <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:14px;">
+            <button class="btn btn-secondary btn-sm" onclick="la('weather')">🌤 Weather</button>
+            <button class="btn btn-secondary btn-sm" onclick="la('crypto')">💰 Crypto</button>
+            <button class="btn btn-secondary btn-sm" onclick="la('exchange')">💱 Forex</button>
+            <button class="btn btn-secondary btn-sm" onclick="la('ip')">🌐 My IP</button>
+            <button class="btn btn-secondary btn-sm" onclick="la('cat')">🐱 Cat Pic</button>
+            <button class="btn btn-secondary btn-sm" onclick="la('github')">🐙 GitHub</button>
+          </div>
+          <div id="laOut" class="result-box" style="min-height:150px;text-align:center;">
+            <p style="color:var(--text-secondary);">Click a button to fetch live data!</p>
+          </div>`;
+        window.la = async function(t) {
+          $('#laOut').innerHTML = '<div style="text-align:center;padding:20px;"><span class="spinner"></span> Fetching live data...</div>';
+          try {
+            let r, d;
+            switch(t) {
+              case 'weather': r = await fetch(APIS.weather); d = await r.text(); $('#laOut').innerHTML = `<h4>🌤 Live Weather</h4><pre style="font-size:16px;line-height:1.8;">${d}</pre>`; return;
+              case 'crypto': r = await fetch(APIS.crypto); d = await r.json(); $('#laOut').innerHTML = `<h4>💰 Cryptocurrency Prices</h4><p>₿ Bitcoin: <strong style="color:#f7931a;">$${d.bitcoin.usd}</strong></p><p>Ξ Ethereum: <strong style="color:#627eea;">$${d.ethereum.usd}</strong></p>`; return;
+              case 'exchange': r = await fetch(APIS.exchange); d = await r.json(); $('#laOut').innerHTML = `<h4>💱 USD Exchange Rates</h4><p>EUR: ${d.rates.EUR?.toFixed(4)}</p><p>GBP: ${d.rates.GBP?.toFixed(4)}</p><p>PKR: ${d.rates.PKR?.toFixed(2)}</p><p>INR: ${d.rates.INR?.toFixed(2)}</p>`; return;
+              case 'ip': r = await fetch(APIS.ip); d = await r.json(); $('#laOut').innerHTML = `<h4>🌐 Your IP Address</h4><p style="font-size:24px;font-weight:900;color:#00d4aa;">${d.ip}</p>`; return;
+              case 'cat': r = await fetch(APIS.cat); d = await r.json(); $('#laOut').innerHTML = `<h4>🐱 Random Cat</h4><img src="${d[0].url}" style="max-width:100%;max-height:350px;border-radius:10px;">`; return;
+              case 'github': const user = prompt('Enter GitHub username:', 'torvalds'); if (user) { r = await fetch(APIS.github + user); d = await r.json(); $('#laOut').innerHTML = `<h4>🐙 GitHub: ${d.login}</h4><img src="${d.avatar_url}" style="width:80px;border-radius:50%;"><p>Repos: ${d.public_repos} | Followers: ${d.followers}</p><p>${d.bio || ''}</p>`; } else $('#laOut').innerHTML = '<p>No username entered.</p>'; return;
+            }
+          } catch(e) { $('#laOut').innerHTML = `<p style="color:var(--danger);">❌ Error: ${e.message}</p>`; }
+        };
+      }
+
+      function rPlanner(b) {
+        let subs = JSON.parse(localStorage.getItem('pln') || '[]');
+        function save() { localStorage.setItem('pln', JSON.stringify(subs)); renderP(); }
+        function renderP() {
+          $('#pList').innerHTML = subs.length ? subs.map((s, i) => `
+            <div style="display:flex;justify-content:space-between;align-items:center;padding:10px;background:rgba(0,0,0,0.2);border-radius:8px;margin-bottom:6px;">
+              <div><strong>${s.n}</strong> · ${s.h}h/wk <span class="badge badge-${s.p === 'High' ? 'danger' : s.p === 'Medium' ? 'warning' : 'info'}">${s.p}</span></div>
+              <button class="btn btn-danger btn-sm" onclick="delP(${i})">×</button>
+            </div>`).join('') : '<p style="text-align:center;color:var(--text-secondary);">No subjects.</p>';
+        }
+        b.innerHTML = `
+          <div class="form-row"><div class="form-group"><label class="form-label">Subject</label><input class="form-input" id="pN"></div><div class="form-group"><label class="form-label">Hours/Week</label><input class="form-input" id="pH" type="number" value="3" min="1"></div></div>
+          <div class="form-group"><label class="form-label">Priority</label><select class="form-input" id="pP"><option>High</option><option selected>Medium</option><option>Low</option></select></div>
+          <button class="btn btn-primary" onclick="addP()" style="width:100%;">Add Subject</button>
+          <div id="pList" style="margin-top:12px;"></div>
+          <button class="btn btn-secondary" onclick="genS()" style="width:100%;margin-top:8px;">Generate Weekly Schedule</button>
+          <button class="btn btn-danger btn-sm" onclick="clrP()" style="width:100%;margin-top:6px;">Clear All</button>
+          <div id="pSched" style="margin-top:12px;"></div>`;
+        window.addP = function() { const n = $('#pN').value.trim(), h = +$('#pH').value, p = $('#pP').value; if (!n || !h) return; subs.push({ n, h, p }); save(); $('#pN').value = ''; };
+        window.delP = function(i) { subs.splice(i, 1); save(); };
+        window.clrP = function() { if (confirm('Clear all?')) { subs = []; save(); $('#pSched').innerHTML = ''; } };
+        window.genS = function() {
+          if (!subs.length) { $('#pSched').innerHTML = '<p style="color:var(--danger);">Add subjects first.</p>'; return; }
+          const days = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
+          $('#pSched').innerHTML = days.map(d => {
+            const ds = subs.sort(() => Math.random() - 0.5).slice(0, 3).map(s => `${s.n} (${Math.max(1, Math.round(s.h / 7))}h)`);
+            return `<div style="background:rgba(0,0,0,0.2);padding:10px;border-radius:6px;margin-bottom:6px;"><strong style="color:#00d4aa;">${d}</strong><p style="font-size:12px;">${ds.join(', ') || 'Free'}</p></div>`;
+          }).join('');
+        };
+        renderP();
+      }
+
+      function rNotes(b) {
+        const K = 'ff_notes';
+        let notes = JSON.parse(localStorage.getItem(K) || '[]');
+        function save() { localStorage.setItem(K, JSON.stringify(notes)); renderN(); }
+        function renderN() {
+          $('#nList').innerHTML = notes.length ? notes.map((n, i) => `
+            <div style="background:rgba(0,0,0,0.2);padding:10px;border-radius:8px;margin-bottom:6px;">
+              <div style="display:flex;justify-content:space-between;"><strong>${n.t || 'Untitled'}</strong><span style="font-size:10px;color:var(--text-secondary);">${new Date(n.d).toLocaleDateString()}</span></div>
+              <p style="font-size:12px;color:var(--text-secondary);margin-top:6px;white-space:pre-wrap;">${n.c}</p>
+              <div style="display:flex;gap:4px;margin-top:6px;"><button class="btn btn-secondary btn-sm" onclick="edN(${i})">Edit</button><button class="btn btn-danger btn-sm" onclick="rmN(${i})">×</button></div>
+            </div>`).join('') : '<p style="text-align:center;color:var(--text-secondary);">No notes yet.</p>';
+        }
+        b.innerHTML = `
+          <div class="form-group"><label class="form-label">Title</label><input class="form-input" id="nT"></div>
+          <div class="form-group"><label class="form-label">Content</label><textarea class="form-input" id="nC" style="min-height:80px;"></textarea></div>
+          <div style="display:flex;gap:6px;"><button class="btn btn-primary" onclick="svN()" style="flex:1;">Save Note</button><button class="btn btn-secondary" onclick="clN()">Clear</button></div>
+          <input class="form-input" id="nS" placeholder="Search notes..." oninput="srN()" style="margin-top:12px;">
+          <div id="nList" style="margin-top:12px;"></div>`;
+        window.svN = function() { const t = $('#nT').value.trim(), c = $('#nC').value.trim(); if (!t && !c) return; notes.unshift({ t: t || 'Untitled', c, d: Date.now() }); save(); clN(); };
+        window.clN = function() { $('#nT').value = ''; $('#nC').value = ''; };
+        window.edN = function(i) { const n = notes[i]; $('#nT').value = n.t; $('#nC').value = n.c; notes.splice(i, 1); save(); };
+        window.rmN = function(i) { if (confirm('Delete?')) { notes.splice(i, 1); save(); } };
+        window.srN = function() { const q = $('#nS').value.toLowerCase(); const f = q ? notes.filter(n => (n.t + n.c).toLowerCase().includes(q)) : notes; $('#nList').innerHTML = f.map(n => `<div style="background:rgba(0,0,0,0.2);padding:10px;border-radius:8px;margin-bottom:6px;"><strong>${n.t || 'Untitled'}</strong><p style="font-size:12px;">${n.c}</p></div>`).join('') || '<p style="text-align:center;color:var(--text-secondary);">No matches.</p>'; };
+        renderN();
+      }
+
+      // ==================== INIT ====================
+      renderCards();
+
+      $('#mobileToggle').addEventListener('click', () => $('#navMenu').classList.toggle('open'));
+      document.querySelectorAll('.nav-link').forEach(l => l.addEventListener('click', () => $('#navMenu').classList.remove('open')));
+
+      document.querySelectorAll('.nav-link[href^="#"]').forEach(l => {
+        l.addEventListener('click', function() {
+          document.querySelectorAll('.nav-link').forEach(x => x.classList.remove('active'));
+          this.classList.add('active');
+        });
+      });
+
+      $('#aiNavBtn').addEventListener('click', () => window.open('http://xorval.xo.je/', '_blank'));
+      $('#heroAiBtn').addEventListener('click', () => window.open('http://xorval.xo.je/', '_blank'));
+
+      document.addEventListener('click', e => { if (e.target.classList.contains('modal-overlay')) closeTool(); });
+      document.addEventListener('keydown', e => { if (e.key === 'Escape') closeTool(); });
+
+      if ('IntersectionObserver' in window) {
+        const obs = new IntersectionObserver(entries => entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); }), { threshold: 0.1 });
+        document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+      } else document.querySelectorAll('.reveal').forEach(el => el.classList.add('visible'));
+
+      document.querySelectorAll('a[href^="#"]').forEach(a => a.addEventListener('click', function(e) {
+        e.preventDefault();
+        const t = document.querySelector(this.getAttribute('href'));
+        if (t) t.scrollIntoView({ behavior: 'smooth' });
+      }));
+
+      console.log('🚀 Fine Future Public School - Advanced Tool Suite Loaded!');
+      console.log('🖼️ Background: bg.png');
+      console.log('🔧 18 Advanced Tools with Live APIs');
+    })();
+  </script>
+</body>
+</html>
